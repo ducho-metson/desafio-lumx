@@ -15,8 +15,8 @@ const users = [
 ];
 
 const orders = [
-    { owner: 0, type: "venda" },
-    { owner: 1, type: "compra" },
+    { _id: 0, owner: 'gabriel@lumx.com', type: "venda" },
+    { _id: 1, owner: 'bruno@lumx.com', type: "compra" },
 ];
 
 async function precisaInserir() {
@@ -35,6 +35,8 @@ async function inserirUsuarios() {
         await model.User.insertMany(users);
         await model.Order.insertMany(orders);
 
+        console.log(orders);
+
         console.log('Usuarios e Pedidos inseridos com sucesso!');
     } catch (error) {
         console.error('Erro ao inserir:', error);
@@ -42,6 +44,7 @@ async function inserirUsuarios() {
         mongoose.disconnect();
     }
 }
+
 
 try {
     if (precisaInserir()) {
@@ -53,6 +56,3 @@ try {
 } catch (error) {
     console.error('Erro ao inicializar database:', error);
 }
-//deletarTudo();
-// Execute a função para inserir usuários
-//inserirUsuarios(); 
