@@ -1,20 +1,51 @@
+const model = require("../../database/model")
 
-// Define the data function for creating user 
-function parseUser(id, name) {
-    return {
-      id: id,
-      name: name,
-    };
-  }
-  
 // Define temporary data array for user list DB to be implemented
-function getAll() {
-  return usersList;
+async function getAll() {
+  const users = await model.User.find();
+  return users.map(user => ({
+    name: user.name,
+    email: user.email
+  }));
 }
 
-var usersList = [
-  parseUser(0, "bruno")
-];
+async function get(name) {
+  const user = await model.User.findOne({ name });
+  if (!user) {
+    throw new Error("Usuário não encontrado");
+  }
 
- 
-module.exports = { getAll };
+  return user;
+}
+
+async function add(name, email) {
+  const newUser = new model.User({ name, email });
+  await newUser.save();
+}
+
+async function remove(name) {
+  const user = await model.User.findOne({ name });
+  if (!user) {
+    throw new Error("Usuário não encontrado");
+  }
+
+  await model.User.deleteOne({ name });
+}
+
+async function update(name, email) {
+  const user = await model.User.findOne({ name });
+  if (!user) {
+    throw new Error("Usuário não encontrado");
+  }
+
+  user.email = email;
+  await user.save();
+}
+
+module.exports = {
+  getAll,
+  get,
+  add,
+  remove,
+  update
+}
