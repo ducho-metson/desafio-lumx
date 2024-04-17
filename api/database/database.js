@@ -7,9 +7,9 @@ async function initializeDatabase(mongoURI) {
 
     const model = require("./model");
 
-    const users = await model.User.find();
+    const orders = await model.Order.find();
 
-    console.log(users);
+    console.log(orders);
 }
 
 
@@ -17,5 +17,3 @@ module.exports = {
     acess,
     initializeDatabase,
 };
-
-

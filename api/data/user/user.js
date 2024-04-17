@@ -1,6 +1,5 @@
 const model = require("../../database/model")
 
-// Define temporary data array for user list DB to be implemented
 async function getAll() {
   const users = await model.User.find();
   return users.map(user => ({
