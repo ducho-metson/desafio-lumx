@@ -7,7 +7,7 @@ Esse projeto consiste em uma API responsável gestão de Usuários e Pedidos em 
 A lógica de envio de notificação não foi enviada, porém a estrutura de mensageria baseada nas atualizações e reenfileiramento de evento em caso falha ao notificar já está desenvolvido.
 
 ## Usuários
-- [Documentação da API de Usuários](./doc/users.swagger.yaml)
+- [Documentação da API de Usuários](./doc/user.swagger.yaml)
 
 * name: nome do usuário.
 * email: email do usuário e identificador único para o mesmo. 
