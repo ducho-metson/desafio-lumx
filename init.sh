@@ -1,4 +1,4 @@
 #!/bin/bash
 node ./script/dbinitializer.js
 
-node server.js
+node ./api/server.js

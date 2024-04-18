@@ -27,7 +27,7 @@ Para utilizar esta aplicação, é necessário ter o Docker instalado na sua má
 
 4. Agora a aplicação está acessável pela url http://localhost:3000
 
-Obs: Na primeira execução que fizer em sua máquina. O script _/scripts/dbinitializer.js_ é acionado para preencher o banco de dados com os seguintes usuários e pedidos:
+Obs: O script _/scripts/dbinitializer.js_ foi utilizado para preencher o banco de dados com os seguintes usuários e pedidos:
 
 ```js
 const users = [

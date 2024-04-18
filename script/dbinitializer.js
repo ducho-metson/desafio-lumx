@@ -1,12 +1,8 @@
-// MongoDB Initializing Script 
-// Create collections and insert initial data
 const config = require('config');
 const dbUrl = config.get('db.url');
 
 const mongoose = require('mongoose');
-// mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Collection Schema definition
 const model = require("../api/database/model")
 
 const users = [
@@ -19,9 +15,9 @@ const orders = [
     { _id: 1, owner: 'bruno@lumx.com', type: "compra" },
 ];
 
-async function precisaInserir() {
-    const users = model.User.find()
-    return users.size() == 0
+async function precisaInserir(connect) {
+    const userCount = await mongoose.connection.db.collection("users").count()
+    return userCount === 0;
 }
 
 async function deletarTudo() {
@@ -29,7 +25,6 @@ async function deletarTudo() {
     await model.Order.deleteMany({});
 }
 
-// Função para inserir dados na coleção
 async function inserirUsuarios() {
     try {
         await model.User.insertMany(users);
@@ -43,13 +38,19 @@ async function inserirUsuarios() {
     }
 }
 
-deletarTudo()
-try {
-    if (precisaInserir()) {
-        inserirUsuarios();
-    } else {
-        mongoose.disconnect();
+async function preencheDatabase() {
+    await mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+    try {
+        const precisoInserir = await precisaInserir()
+        if (precisoInserir) {
+            console.log('Nenhum dado de entrada encontrado, executando preenchimento de dados para validação')
+            inserirUsuarios();
+        } else {
+            mongoose.disconnect();
+        }
+    } catch (error) {
+        console.error('Erro ao inicializar database:', error);
     }
-} catch (error) {
-    console.error('Erro ao inicializar database:', error);
 }
+
+preencheDatabase()
