@@ -2,9 +2,9 @@
 
 ## Descrição 
 
-Esse projeto consiste em uma API responsável gestão de Usuários e Pedidos em um banco de dados MongoDB, proporcionando um CRUD para gestão dessas informações. Além disso, também é responsável pelo envio de eventos, utilizando RabbitMQ como intermediário, para comunicar atualizações de pedidos para usuários responsáveis. 
+Esse projeto consiste em uma API responsável gestão de Usuários e Pedidos em um banco de dados MongoDB, proporcionando um CRUD para gestão dessas informações. Além disso, também é responsável pelo envio de eventos, utilizando RabbitMQ como intermediário, para uma função lamba cujo objetivo é comunicar atualizações de pedidos para usuários responsáveis.
 
-A lógica de envio de notificação não foi enviada, porém a estrutura de mensageria baseada nas atualizações e reenfileiramento de evento em caso falha ao notificar já está desenvolvido.
+A função lambda nesse projeto é um consumer e a comunicação, como explicado anteriomente, entre ele e a API é numa relação de consumer/publisher. A lógica de envio de notificação não foi enviada, porém a estrutura de mensageria baseada nas atualizações e reenfileiramento de evento em caso falha ao notificar já está desenvolvido.
 
 ## Requisitos
 
@@ -55,6 +55,22 @@ const orders = [
 * type: status referente ao pedido.
 
 [Documentação da API de Pedidos](./doc/order.swagger.yaml)
+
+
+## Infraestrutura
+
+#### Virtualização
+
+Todas as infraestruturas e aplicações executadas por essa aplicação estão dockerizadas com o objetivo de estabelecer uma configuração de comunicação entre elas e possibilitar que o ambiente seja levantado facilmente.
+
+#### Persistência de Dados
+
+Para a persistência de dados dessa aplicação, foi utilizado o MongoDB. O acesso à esse MongoDB é realizado apenas pela API CRUD.
+
+
+#### Eventos
+
+Para a gestão de eventos e comunicação da API(publisher) com a função lambda(consumer), foi utilizado o RabbitMQ. Esse por sua vez, garante que comunicação baseada em eventos entre as aplicações ddesse projeto, persistindo eventos na fila e refileirando-os caso necessário.
 
 ## Melhorias 
 
