@@ -1,6 +1,6 @@
 const ordersData = require('../../database/data/order/order')
 const errors = require('../../utils/errors')
-const notifier = require('../../services/notifier/notifier')
+const notifier = require('../../externalservices/notifier/notifier')
 
 async function getAll() {
     return await ordersData.getAll();

@@ -1,7 +1,7 @@
 const errors = require("../../utils/errors")
 const express = require('express')
 const orders = express.Router();
-const ordersController = require('../../controllers/orders/orders')
+const ordersController = require('../../services/orders/orders')
 
 orders.use(express.json());
 

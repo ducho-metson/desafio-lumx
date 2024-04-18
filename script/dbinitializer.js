@@ -21,7 +21,7 @@ const orders = [
 
 async function precisaInserir() {
     const users = model.User.find()
-    return users.size() > 0
+    return users.size() == 0
 }
 
 async function deletarTudo() {
@@ -35,8 +35,6 @@ async function inserirUsuarios() {
         await model.User.insertMany(users);
         await model.Order.insertMany(orders);
 
-        console.log(orders);
-
         console.log('Usuarios e Pedidos inseridos com sucesso!');
     } catch (error) {
         console.error('Erro ao inserir:', error);
@@ -45,14 +43,13 @@ async function inserirUsuarios() {
     }
 }
 
-
-// try {
-//     if (precisaInserir()) {
-//         deletarTudo();
-//         inserirUsuarios();
-//     } else {
-//         mongoose.disconnect();
-//     }
-// } catch (error) {
-//     console.error('Erro ao inicializar database:', error);
-// }
+deletarTudo()
+try {
+    if (precisaInserir()) {
+        inserirUsuarios();
+    } else {
+        mongoose.disconnect();
+    }
+} catch (error) {
+    console.error('Erro ao inicializar database:', error);
+}

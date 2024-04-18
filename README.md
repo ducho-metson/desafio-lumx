@@ -1,4 +1,4 @@
-# LUMX Challenge
+# Lumx Challenge - Felipe Metson
 
 ## Descrição 
 
@@ -20,23 +20,56 @@ Para utilizar esta aplicação, é necessário ter o Docker instalado na sua má
 ```bash
    cd desafio-lumx
 ```
-3. Rode e builde a aplicação
+3. Rode e builde a aplicação, se estiver o makefile garante a execução com um _make_
 ```bash
    docker-compose up --build
 ```
 
 4. Agora a aplicação está acessável pela url http://localhost:3000
-   
+
+Obs: Na primeira execução que fizer em sua máquina. O script _/scripts/dbinitializer.js_ é acionado para preencher o banco de dados com os seguintes usuários e pedidos:
+
+```js
+const users = [
+    { name: 'Gabriel', email: 'gabriel@lumx.com' },
+    { name: 'Bruno', email: 'bruno@lumx.com' },
+];
+
+const orders = [
+    { _id: 0, owner: 'gabriel@lumx.com', type: "venda" },
+    { _id: 1, owner: 'bruno@lumx.com', type: "compra" },
+];
+```
+
 ## Usuários
-- [Documentação da API de Usuários](./doc/user.swagger.yaml)
 
 * name: nome do usuário.
 * email: email do usuário e identificador único para o mesmo. 
 
+[Documentação da API de Usuários](./doc/user.swagger.yaml)
 
 ### Pedido
-- [Documentação da API de Pedidos](./doc/order.swagger.yaml)
 
 * id: identificador único para pedido.
 * owner: email de usuário responsável pelo pedido.
 * type: status referente ao pedido.
+
+[Documentação da API de Pedidos](./doc/order.swagger.yaml)
+
+## Melhorias 
+
+A falta de conhecimento em NodeJs foi um desafio nessa tarefa, tive alguns insights durante o desenvolvimento, porém no intuito de fazer um entregável no prazo deixarei essa sessão reservada para possíveis melhorias
+
+#### Engenharia de Software
+
+Aplicação poderia ter sido implementada com tipos para permitir injeção de dependência. Melhoraria a garantia de coesão dos modulos implementados, além de melhorar desempenho uma vez que reinstancio conexões com rabbit sempre que envio um evento. 
+
+#### Testes de Integração e Unitários
+
+Testes de integração estavam em meu radar desde o início dessa tarefa, todavia, pela falta de tempo e pelo ferramentas a serem integradas nos testes como MongoDB e RabbitMQ o tempo a ser gasto foi preferido em outras etapas. A implementação do teste facilitaria o desenvolvimento, inclusive numa possível extensão dessa aplicação incluindo mais regras de negócio.
+
+#### Segurança
+
+A aplicação implementada não garante segurança alguma. Não existe validação de quem está fazendo as requisições, e portanto, não existe uma proteção contra ataques de sobrecarga e também não existe proteção contra os dados do servidor, uma vez que não existe permissionamento para o cliente.
+
+Uma solução para esse problema seria a implementação de endpoints de autentição para garantir que o cliente tem permissão de alteração nos dados em questão. Além de ter a capacidade de bloquear ataques provenientes desse mesmo cliente.

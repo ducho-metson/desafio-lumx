@@ -2,13 +2,13 @@ const errors = require("../../utils/errors")
 
 const express = require('express')
 const users = express.Router();
-const usersController = require('../../controllers/users/users')
+const usersServices = require('../../services/users/users')
 
 users.use(express.json());
 
 users.get('/', async (req, res) => {
     try {
-        const userList = await usersController.getAll()
+        const userList = await usersServices.getAll()
         res.status(200).json(userList);
     } catch (err) {
         if (err == errors.notFound) {
@@ -27,7 +27,7 @@ users.get('/', async (req, res) => {
 users.get('/:email', async (req, res) => {
     try {
         const email = req.params.email;
-        const userList = await usersController.get(email);
+        const userList = await usersServices.get(email);
         res.status(200).json(userList);
     } catch (err) {
         if (err == errors.notFound) {
@@ -46,7 +46,7 @@ users.get('/:email', async (req, res) => {
 users.post('/', async (req, res) => {
     try {
         const { name, email } = req.body;
-        await usersController.add(name, email);
+        await usersServices.add(name, email);
         res.status(200).json('Usuario adicionado com sucesso');
     } catch (err) {
         if (err == errors.invalidParameters) {
@@ -61,7 +61,7 @@ users.post('/', async (req, res) => {
 users.delete('/:email', async (req, res) => {
     try {
         const email = req.params.email;
-        await usersController.remove(email);
+        await usersServices.remove(email);
         res.status(200).json('Usuario removido com sucesso');
     } catch (err) {
         if (err == errors.invalidParameters) {
@@ -78,7 +78,7 @@ users.delete('/:email', async (req, res) => {
 users.put('/', async (req, res) => {
     try {
         const { name, email } = req.body;
-        await usersController.update(name, email);
+        await usersServices.update(name, email);
         res.status(200).json('Usuario atualizado com sucesso');
     } catch (err) {
         if (err == errors.invalidParameters) {

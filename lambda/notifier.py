@@ -46,7 +46,7 @@ def callback(ch, method, properties, body):
         print("Mensagem recebida (primeira para este ID):", message_data)
 
     try:
-        print("Email de notificação enviado para", message_data['order']['email'], " alegando mudança de status para ", message_data['order']['type'])
+        print("Email de notificação enviado para", message_data['order']['email'], "alegando mudança de status para", message_data['order']['type'])
     except:
         ch.basic_publish(
             exchange='',
