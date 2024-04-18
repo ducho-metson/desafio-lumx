@@ -34,9 +34,9 @@ async function update(id, owner, type) {
     await ordersData.update(id, owner, type);
 
     const message = {
-        pedido: {
+        order: {
             id: id,
-            owner: owner,
+            email: owner,
             type: type
         },
         time: Date.now()
