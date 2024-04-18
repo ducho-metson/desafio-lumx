@@ -1,0 +1,89 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "API de Pedidos"
+  description: "API para gerenciar pedidos"
+basePath: "/api"
+schemes:
+  - "http"
+paths:
+  /orders:
+    get:
+      summary: "Listar todos os pedidos"
+      responses:
+        200:
+          description: "Lista de todos os pedidos"
+    post:
+      summary: "Adicionar um novo pedido"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Objeto contendo informações do novo pedido"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              owner:
+                type: "string"
+              type:
+                type: "string"
+          example:
+            owner: "felipe@lumx.com"
+            type: "entregue"
+      responses:
+        200:
+          description: "Pedido adicionado com sucesso"
+        400:
+          description: "Erro: Parâmetros inválidos ou Owner inserido não existe"
+    put:
+      summary: "Atualizar um pedido existente"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Objeto contendo informações do pedido a ser atualizado"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "string"
+              owner:
+                type: "string"
+              type:
+                type: "string"
+          example:
+            id: "123"
+            owner: "felipe@lumx.com"
+            type: "entregue"
+      responses:
+        200:
+          description: "Pedido atualizado com sucesso"
+        400:
+          description: "Erro: Parâmetros inválidos ou Pedido não existe ou Email não está atrelado à um Usuário"
+  /orders/{id}:
+    get:
+      summary: "Obter um pedido pelo ID"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID do pedido a ser obtido"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Pedido encontrado"
+        400:
+          description: "Erro: GET precisa ter um ID na URL ou Pedido não encontrado"
+    delete:
+      summary: "Remover um pedido pelo nome do proprietário"
+      parameters:
+        - name: "name"
+          in: "path"
+          description: "Nome do proprietário do pedido a ser removido"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Pedido removido com sucesso"
+        400:
+          description: "Erro: Parâmetros inválidos ou Pedido a ser removido não existe"
