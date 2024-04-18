@@ -4,5 +4,10 @@
   },
   "db": {
     "url": "mongodb://mongodb:27017/desafio-lumx-db"
+  },
+  "rabbit": {
+    "url": "amqp://rabbitmq:5672",
+    "order-changed-queue": "orders-changed",
+    "orders-exchange": "orders"
   }
 }

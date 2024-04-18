@@ -1,5 +1,6 @@
 const ordersData = require('../../database/data/order/order')
 const errors = require('../../utils/errors')
+const notifier = require('../../services/notifier/notifier')
 
 async function getAll() {
     return await ordersData.getAll();
@@ -30,7 +31,18 @@ async function update(id, owner, type) {
         throw new Error('Atualização de pedido precisa de id do pedido, email do owner e tipo do pedido!');
     }
 
-    return await ordersData.update(id, owner, type);
+    await ordersData.update(id, owner, type);
+
+    const message = {
+        pedido: {
+            id: id,
+            owner: owner,
+            type: type
+        },
+        time: Date.now()
+    };
+
+    await notifier.notify(JSON.stringify(message)).catch(console.error);
 }
 
 module.exports = {

@@ -1,0 +1,11 @@
+FROM python:latest
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1 
+
+COPY lambda/notifier.py .
+
+RUN pip install pika
+
+CMD ["python", "notifier.py"]
