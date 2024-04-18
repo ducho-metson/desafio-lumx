@@ -27,9 +27,6 @@ paths:
                 type: "string"
               type:
                 type: "string"
-          example:
-            owner: "felipe@lumx.com"
-            type: "entregue"
       responses:
         200:
           description: "Pedido adicionado com sucesso"
@@ -51,10 +48,6 @@ paths:
                 type: "string"
               type:
                 type: "string"
-          example:
-            id: "123"
-            owner: "felipe@lumx.com"
-            type: "entregue"
       responses:
         200:
           description: "Pedido atualizado com sucesso"

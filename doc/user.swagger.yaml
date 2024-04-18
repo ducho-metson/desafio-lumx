@@ -27,9 +27,6 @@ paths:
                 type: "string"
               email:
                 type: "string"
-          example:
-            name: "Felipe"
-            email: "felipe@lumx.com"
       responses:
         200:
           description: "Usuário adicionado com sucesso"
@@ -49,9 +46,6 @@ paths:
                 type: "string"
               email:
                 type: "string"
-          example:
-            name: "Felipe"
-            email: "felipe@lumx.com"
       responses:
         200:
           description: "Usuário atualizado com sucesso"

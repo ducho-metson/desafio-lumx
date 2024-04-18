@@ -6,6 +6,27 @@ Esse projeto consiste em uma API responsável gestão de Usuários e Pedidos em 
 
 A lógica de envio de notificação não foi enviada, porém a estrutura de mensageria baseada nas atualizações e reenfileiramento de evento em caso falha ao notificar já está desenvolvido.
 
+## Requisitos
+
+Para utilizar esta aplicação, é necessário ter o Docker instalado na sua máquina.
+
+## Instalação e Execução
+
+1. Clone o repositório:
+```bash
+ git clone https://github.com/ducho-metson/desafio-lumx.git
+```
+2. Vá para o diretório da aplicação:
+```bash
+   cd desafio-lumx
+```
+3. Rode e builde a aplicação
+```bash
+   docker-compose up --build
+```
+
+4. Agora a aplicação está acessável pela url http://localhost:3000
+   
 ## Usuários
 - [Documentação da API de Usuários](./doc/user.swagger.yaml)
 
