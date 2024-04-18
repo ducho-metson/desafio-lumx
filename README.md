@@ -74,11 +74,14 @@ Para a gestão de eventos e comunicação da API(publisher) com a função lambd
 
 ## Melhorias 
 
-A falta de conhecimento em NodeJs foi um desafio nessa tarefa, tive alguns insights durante o desenvolvimento, porém no intuito de fazer um entregável no prazo deixarei essa sessão reservada para possíveis melhorias
+A falta de conhecimento em NodeJs e o tempo curto do desafio(so consegui começa-lo de fato na terça-feira.) me dificultaram para efetuar uma entrega de qualidade. Apesar de funcional, consegui identificar diversos pontos de melhora e farei essa sessão para apontar e justifica-los, uma vez que não haverá tempo de implementar.
+
 
 #### Engenharia de Software
 
 Aplicação poderia ter sido implementada com tipos para permitir injeção de dependência. Melhoraria a garantia de coesão dos modulos implementados, além de melhorar desempenho uma vez que reinstancio conexões com rabbit sempre que envio um evento. 
+
+Documentação poderia ser feita melhor, em especial a documentação do consumer e da função lambda.
 
 #### Testes de Integração e Unitários
 
