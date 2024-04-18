@@ -1,4 +1,5 @@
-const model = require("../../database/model")
+const model = require("../../model")
+const errors = require("../../../utils/errors")
 
 async function getAll() {
   const users = await model.User.find();
@@ -8,10 +9,10 @@ async function getAll() {
   }));
 }
 
-async function get(name) {
-  const user = await model.User.findOne({ name });
+async function get(email) {
+  const user = await model.User.findOne({ email });
   if (!user) {
-    throw new Error("Usuário não encontrado");
+    throw errors.notFound
   }
 
   return user;
@@ -22,22 +23,22 @@ async function add(name, email) {
   await newUser.save();
 }
 
-async function remove(name) {
-  const user = await model.User.findOne({ name });
+async function remove(email) {
+  const user = await model.User.findOne({ email });
   if (!user) {
-    throw new Error("Usuário não encontrado");
+    throw errors.notFound
   }
 
   await model.User.deleteOne({ name });
 }
 
 async function update(name, email) {
-  const user = await model.User.findOne({ name });
+  const user = await model.User.findOne({ email });
   if (!user) {
-    throw new Error("Usuário não encontrado");
+    throw errors.notFound
   }
 
-  user.email = email;
+  user.name = name;
   await user.save();
 }
 

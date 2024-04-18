@@ -1,4 +1,4 @@
-const ordersData = require('../../data/order/order')
+const ordersData = require('../../database/data/order/order')
 const errors = require('../../utils/errors')
 
 async function getAll() {

@@ -1,5 +1,5 @@
-const model = require("../../database/model")
-const errors = require("../../utils/errors")
+const model = require("../../model")
+const errors = require("../../../utils/errors")
 
 async function getAll() {
   const orders = await model.Order.find();

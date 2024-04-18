@@ -4,7 +4,7 @@ const config = require('config');
 const dbUrl = config.get('db.url');
 
 const mongoose = require('mongoose');
-mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Collection Schema definition
 const model = require("../api/database/model")
@@ -46,13 +46,13 @@ async function inserirUsuarios() {
 }
 
 
-try {
-    if (precisaInserir()) {
-        deletarTudo();
-        inserirUsuarios();
-    } else {
-        mongoose.disconnect();
-    }
-} catch (error) {
-    console.error('Erro ao inicializar database:', error);
-}
+// try {
+//     if (precisaInserir()) {
+//         deletarTudo();
+//         inserirUsuarios();
+//     } else {
+//         mongoose.disconnect();
+//     }
+// } catch (error) {
+//     console.error('Erro ao inicializar database:', error);
+// }

@@ -10,7 +10,7 @@ const Counter = database.acess.model('Counter', counterSchema);
 async function getNextSequenceValue(sequenceName) {
     const counter = await Counter.findOneAndUpdate(
         { _id: sequenceName },
-        { $inc: { seq: 0 } },
+        { $inc: { seq: 1 } },
         { new: true, upsert: true }
     );
     return counter.seq;

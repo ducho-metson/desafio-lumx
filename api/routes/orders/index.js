@@ -50,7 +50,8 @@ orders.post('/', async (req, res) => {
     try {
         const { owner, type } = req.body;
         const idOrder = await ordersController.add(owner, type);
-        res.status(200).json('Pedido adicionado com sucesso. id de pedido: ', idOrder);
+        const msg = 'Pedido adicionado com sucesso. id de pedido: ' + idOrder;
+        res.status(200).json(msg);
     } catch (err) {
         if (err == errors.invalidParameters) {
             res.status(400).json({ error: "Parametros inválidos" });
@@ -75,7 +76,7 @@ orders.delete('/:name', async (req, res) => {
             res.status(400).json({ error: "Pedido a ser removido não existe" });
         } else {
             console.error(err);
-            res.status(500).json({ error: 'Erro adicionando Pedido:' });
+            res.status(500).json({ error: 'Erro removendo Pedido:' });
         }
     }
 });
